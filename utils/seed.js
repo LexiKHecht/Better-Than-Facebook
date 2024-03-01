@@ -58,14 +58,14 @@ connection.once("open", async () => {
       }
       // saving faker thoughts
       const savedThoughts = await Thoughts.create(data);
-      console.log(
-        `${savedThoughts.length} thoughts created for user ${user.username}`
-      );
-
+      
       // adding craeted thoughts to users
       user.thoughts = data.map((thought) => thought._id);
       await user.save();
     }
+    console.log(
+      `${Thoughts.length} thoughts created for each user`
+    );
   } catch (err) {
     console.error("Error seeding", err);
   }
