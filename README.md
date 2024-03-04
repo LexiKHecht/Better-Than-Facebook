@@ -80,7 +80,7 @@ To make requests to the database, JSON formating must match model parameters
 }
   ```
 
-[eComShopDemo.webm](https://github.com/LexiKHecht/eComShop/assets/145725343/0d116bbc-93ac-44dd-af57-e4e0fb195485)
+[BTF-Demo.webm](https://github.com/LexiKHecht/Better-Than-Facebook/assets/145725343/b03d38bf-afc7-4efc-aa5c-a6d3be02f155)
 
 
 ## Technology Used
