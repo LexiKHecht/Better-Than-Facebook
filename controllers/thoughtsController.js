@@ -1,4 +1,4 @@
-const { Thought, User, Thoughts } = require("../models/index");
+const { User, Thoughts } = require("../models/index");
 
 module.exports = {
   // get ALL thoughts
@@ -40,7 +40,7 @@ module.exports = {
         });
       }
 
-      res.json("Thought created!");
+      res.json(thoughtCreate);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -102,7 +102,7 @@ module.exports = {
   // Remove thought reaction by id
   async deleteReaction(req, res) {
     try {
-      const thoughtDelete = await Thoughts.findOneAndRemove(
+      const thoughtDelete = await Thoughts.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $pull: { reactions: { _id: req.params.reactionId } } },
         { runValidators: true, new: true }
@@ -112,7 +112,7 @@ module.exports = {
         return res.status(404).json({ message: "No thought found" });
       }
 
-      res.json(thoughtDelete);
+      res.json({ message: "Reaction deleted!" });
     } catch (err) {
       res.status(500).json(err);
     }

@@ -1,4 +1,4 @@
-const { User, Thought } = require("../models/index");
+const { User, Thoughts } = require("../models/index");
 
 module.exports = {
   // get ALL users
@@ -56,6 +56,7 @@ module.exports = {
   // delete user by their id
   async deleteUser(req, res) {
     try {
+       const thought = await Thoughts.findOne({ _id: req.params.thoughtId });
       const userDelete = await User.findOneAndDelete({
         _id: req.params.userId,
       });
@@ -63,9 +64,15 @@ module.exports = {
       if (!userDelete) {
         return res.status(404).json({ message: "No user found" });
       }
-      // deleteing corrisponding user thoughts
-      await Thought.deleteMany({ _id: { $in: userDelete.thoughts } });
+      else if (thought) {
+              await Thoughts.deleteMany({ _id: { $in: userDelete.thoughts } });
       res.json({ message: "User deleted!" });
+      }
+      
+      res.json({ message: "User deleted!" });
+
+      // deleteing corrisponding user thoughts
+
     } catch (err) {
       res.status(500).json(err);
     }
